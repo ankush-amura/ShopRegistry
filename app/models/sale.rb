@@ -1,5 +1,10 @@
 class Sale < ApplicationRecord
 
+  after_validation do |salePerson|
+    salePerson.name.capitalize!
+    salePerson.contact="+91 "+salePerson.contact
+  end
+
   # each sale person belongs to the moderator and should consult only that moderator
   belongs_to :moderator
 

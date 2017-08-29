@@ -1,5 +1,5 @@
 class Moderator < ApplicationRecord
-
+   before_save  :performChanges , on: [:create,:update]
    # each superadmin has a number of moderators and hence each moderator belongs to some superadmin
    belongs_to :superadmin
 
@@ -18,5 +18,11 @@ class Moderator < ApplicationRecord
    # each moderator has a contact provided with validation as presence,uniqeness,and numericality
    validates :contact ,presence: true ,  uniqueness: true , numericality: true , length: { is: 10 }
 
-
+   private
+     def performChanges
+         puts name
+         puts contact
+           name.capitalize!
+           contact = " +91 "+contact.to_s
+     end
 end
