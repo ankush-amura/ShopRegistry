@@ -8,19 +8,19 @@ class Superadmin < ApplicationRecord
   validates :name, presence: true
 
   # validating email id for its confirmation to be provided
-  validates :email ,confirmation: true
+  validates :email , presence: true
 
   # validating the password with confirmation and length attributes
-  validates :password , confirmation: true , uniqueness: true , length: {minimum: 8}
+  validates :password , presence: true,confirmation: true , uniqueness: true , length: {minimum: 6}
 
   # validating the contact with uniqueness and numericality
-  validates :contact , uniqueness: true , numericality: true , length: { is: 10 }
+  validates :contact , presence:  true,uniqueness: true , numericality: true , length: { is: 10 }
 
   private
      # this method capitalizes the name of the admin before the superadmin is put into database
      def capitalizeName
-        # name of the superadmin that is to be inserted into the database 
-        name=name.capitalize
-        puts name
+        # name of the superadmin that is to be inserted into the database
+      #self.name = self.name.capitalize
+       #puts :name
      end
 end
