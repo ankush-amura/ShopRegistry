@@ -1,4 +1,3 @@
-<html>
 <fieldset>
   <legend>Sales Persons Under You</legend>
 <table>
@@ -18,11 +17,53 @@
 <% end %>
 </table>
 </fieldset>
+<br>
+<br>
+<fieldset>
+  <legend>All Shops Under You</legend>
+<table>
+<tr>
+  <th>Shop id &nbsp&nbsp</th>
+  <th>Shop name &nbsp&nbsp&nbsp</th>
+  <th>Sales Person &nbsp&nbsp&nbsp</th>
+  <th>Shop city  &nbsp&nbsp&nbsp</th>
+  <th>Shop Area  &nbsp&nbsp&nbsp</th>
+  <th>Shop Category &nbsp&nbsp&nbsp&nbsp</th>
+  <th>Approved Status &nbsp&nbsp&nbsp&nbsp</th>
+  <th>Shop created at  &nbsp&nbsp&nbsp</th>
+  <th>Shop Updated At &nbsp&nbsp&nbsp</th>
+</tr>
+<% @shops.each_with_index do |shop,index| %>
+<tr>
+  <td><%= shop.id%></td>
+  <td><%= shop.name%> &nbsp&nbsp&nbsp</td>
+  <td><%= @person[index].name %> &nbsp&nbsp&nbsp</td>
+  <td><%= @city[index].name%> &nbsp&nbsp&nbsp</td>
+  <td><%= @area[index].name %> &nbsp&nbsp&nbsp</td>
+  <td><%= @category[index].name %> &nbsp&nbsp&nbsp</td>
+  <td><% if shop.approve %>
+          <%= "yes" %>
+       <% else %>
+         <%= "no" %>
+       <% end %>  </td>
+  <td><%= shop.created_at %>  &nbsp&nbsp&nbsp</td>
+  <td><%= shop.updated_at %> &nbsp&nbsp&nbsp</td>
+  <td><%= link_to "Approve" , controller: 'moderators' , action: 'approve', id: shop.id %></td>
+  <td>&nbsp&nbsp&nbsp&nbsp <%= link_to "Reject" , controller: 'moderators' , action: 'reject',id: shop.id %></td>
+  <td>&nbsp&nbsp&nbsp&nbsp <%= link_to "Remove" , controller: 'moderators' , action: 'remove',id: shop.id %></td>
+
+</td>
+</tr>
+<% end %>
+</table>
+</fieldset>
+<br>
 <p align="center">
 <%= link_to "Add More SalePersons" , controller: 'sales' , action: 'new' %>
 </p>
 <p align="center">
 <%= link_to "Delete SalePersons " , controller: 'moderators' , action: 'delsale' %>
 </p>
-
-</html>
+<p align="center">
+<%= link_to "Add Shop Category " , controller: 'moderators' , action: 'delsale' %>
+</p>

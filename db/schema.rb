@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170828135308) do
+ActiveRecord::Schema.define(version: 20170901064038) do
 
   create_table "areas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20170828135308) do
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
   end
 
   create_table "cities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -84,6 +85,7 @@ ActiveRecord::Schema.define(version: 20170828135308) do
     t.string "property_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "approve"
     t.index ["property_id", "property_type"], name: "index_shops_on_property_id_and_property_type"
   end
 
