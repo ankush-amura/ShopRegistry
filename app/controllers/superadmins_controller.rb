@@ -6,7 +6,7 @@ class SuperadminsController < ApplicationController
   end
 
 def delmod
-  @superadmin=Superadmin.find_by_id(session[:current_user_id])
+  @superadmin=Superadmin.first
   # we get moderators that belongs to that superadmins
   @moderators= @superadmin.moderators
  if params[:id]
@@ -19,7 +19,7 @@ end
      #displays session variable onto the console
      puts session[:current_user_id]
      # here we get the superadmin of the particular id
-     @superadmin=Superadmin.find_by_id(session[:current_user_id])
+     @superadmin=Superadmin.first
      # we get moderators that belongs to that superadmins
      @moderators= @superadmin.moderators
   end
@@ -32,8 +32,9 @@ end
      # checking if the superadmin saves into the superadmins table
      if @superadmin.save!
       # render responsibility page for superadmin
-      render("index")
       session[:current_user_id]=@superadmin.id
+      redirect_to(controller: "superadmins",action: "index")
+
      end
   end
 # this function is resposible for permitting the parameters that  should be included

@@ -18,9 +18,9 @@
 <tr>
   <td><%= shop.id%></td>
   <td><%= shop.name%> &nbsp&nbsp&nbsp</td>
-  <td><%= @city[index].name%> &nbsp&nbsp&nbsp</td>
-  <td><%= @area[index].name %> &nbsp&nbsp&nbsp</td>
-  <td><%= @category[index].name %> &nbsp&nbsp&nbsp</td>
+  <td><%= shop.city.name%> &nbsp&nbsp&nbsp</td>
+  <td><%= shop.area.name %> &nbsp&nbsp&nbsp</td>
+  <td><%= shop.category.name %> &nbsp&nbsp&nbsp</td>
   <td><% if shop.approve %>
           <%= "yes" %>
        <% else %>
@@ -33,4 +33,10 @@
 </tr>
 <% end %>
 </table>
+<br>
+<br>
+<br>
+<p align='center'>
+&nbsp&nbsp&nbsp&nbsp<%=  link_to "Add New Shop To System" , controller: 'sales' , action: 'newShop'%>&nbsp&nbsp
+</p>
 </fieldset>

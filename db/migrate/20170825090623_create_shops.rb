@@ -2,10 +2,12 @@ class CreateShops < ActiveRecord::Migration[5.1]
   def change
     create_table :shops do |t|
       t.string :name
-      t.integer :property_id
-      t.string :property_type
+      t.references :city
+      t.references :area
+      t.references :sale
+      t.references :category
       t.timestamps
     end
-    add_index :shops,[:property_id , :property_type]
+    add_index :shops,[:area_id , :city_id, :sale_id]
   end
 end

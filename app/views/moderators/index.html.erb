@@ -37,10 +37,11 @@
 <tr>
   <td><%= shop.id%></td>
   <td><%= shop.name%> &nbsp&nbsp&nbsp</td>
-  <td><%= @person[index].name %> &nbsp&nbsp&nbsp</td>
-  <td><%= @city[index].name%> &nbsp&nbsp&nbsp</td>
-  <td><%= @area[index].name %> &nbsp&nbsp&nbsp</td>
-  <td><%= @category[index].name %> &nbsp&nbsp&nbsp</td>
+  <td><%= shop.sale.name %> &nbsp&nbsp&nbsp</td>
+  <td><%= shop.city.name%> &nbsp&nbsp&nbsp</td>
+  <td><%= shop.area.name %> &nbsp&nbsp&nbsp</td>
+  <td><%= shop.category.name %> &nbsp&nbsp&nbsp</td>
+
   <td><% if shop.approve %>
           <%= "yes" %>
        <% else %>

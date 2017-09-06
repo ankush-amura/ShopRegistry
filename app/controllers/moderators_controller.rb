@@ -6,28 +6,14 @@ class ModeratorsController < ApplicationController
   end
 
   def index
-    session[:current_moderator_id]=2
+    session[:current_moderator_id]=1
     @moderator=Moderator.find_by_id(session[:current_moderator_id])
     # we get moderators that belongs to that superadmins
     @sales= @moderator.sales
     @shops=[]
-    @person=[]
-    @area=[]
-    @city=[]
-    @category=[]
     @sales.each do |sale|
           sale.shops.each do |shop|
            @shops.push(shop)
-           id_sale=shop.property_id
-           sale=Sale.find(id_sale)
-           @person.push(sale)
-           print shop.name
-           @area_id=Shop.where(name: shop.name, property_type: 'Area').first.property_id
-           @category_id=Shop.where(name: shop.name, property_type: 'Category').first.property_id
-           @city_id=Area.find(@area_id).city_id
-           @category.push(Category.find(@category_id))
-           @city.push(City.find(@city_id))
-           @area.push(Area.find(@area_id))
           end
       end
   end
@@ -40,7 +26,7 @@ class ModeratorsController < ApplicationController
    # printing session variable on console
    puts session[:current_user_id]
    # searching for superadmin under which this moderator should exists
-   @superadmin=Superadmin.find_by_id(session[:current_user_id])
+   @superadmin=Superadmin.first
    # inserting the moderator inside the superadmin
    @superadmin.moderators << @moderator
    # checking if the superadmin is valid to be saved
@@ -58,6 +44,7 @@ end
   # this method is responsible for deleting the sale person
   def delsale
     # getting the moderator responsible for current session sales persons
+    session[:current_moderator_id]=1
     @moderator=Moderator.find_by_id(session[:current_moderator_id])
     # we get salesperson that belongs to that moderator
     @sales = @moderator.sales

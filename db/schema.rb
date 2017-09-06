@@ -21,9 +21,12 @@ ActiveRecord::Schema.define(version: 20170901064038) do
   end
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.bigint "category_id"
+    t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.index ["category_id"], name: "index_categories_on_category_id"
   end
 
   create_table "cities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -52,19 +55,14 @@ ActiveRecord::Schema.define(version: 20170901064038) do
     t.index ["superadmin_id"], name: "index_moderators_on_superadmin_id"
   end
 
-  create_table "replies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string "reply"
-    t.bigint "review_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["review_id"], name: "index_replies_on_review_id"
-  end
-
   create_table "reviews", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string "review"
+    t.string "message"
+    t.string "role"
     t.bigint "shop_id"
+    t.bigint "comment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_reviews_on_comment_id"
     t.index ["shop_id"], name: "index_reviews_on_shop_id"
   end
 
@@ -81,12 +79,18 @@ ActiveRecord::Schema.define(version: 20170901064038) do
 
   create_table "shops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
-    t.integer "property_id"
-    t.string "property_type"
+    t.bigint "city_id"
+    t.bigint "area_id"
+    t.bigint "sale_id"
+    t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "approve"
-    t.index ["property_id", "property_type"], name: "index_shops_on_property_id_and_property_type"
+    t.index ["area_id", "city_id", "sale_id"], name: "index_shops_on_area_id_and_city_id_and_sale_id"
+    t.index ["area_id"], name: "index_shops_on_area_id"
+    t.index ["category_id"], name: "index_shops_on_category_id"
+    t.index ["city_id"], name: "index_shops_on_city_id"
+    t.index ["sale_id"], name: "index_shops_on_sale_id"
   end
 
   create_table "superadmins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
